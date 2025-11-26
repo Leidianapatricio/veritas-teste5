@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2 class="mb-4">Dashboard Admin</h2>
+
+    <div class="row g-4">
+
+        <!-- Card Aluno -->
+        <div class="col-md-4">
+            <a th:href="@{/users/new?role=ALUNO}" class="card card-aluno h-100 text-white text-decoration-none">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title">Cadastrar Aluno</h5>
+                    <p class="card-text">Adicione novos alunos ao sistema.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card Professor -->
+        <div class="col-md-4">
+            <a th:href="@{/users/new?role=PROFESSOR}" class="card card-professor h-100 text-white text-decoration-none">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title">Cadastrar Professor</h5>
+                    <p class="card-text">Adicione novos professores ao sistema.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card Colegiado -->
+        <div class="col-md-4">
+            <a th:href="@{/collegiates/new}" class="card card-colegiado h-100 text-white text-decoration-none">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title">Cadastrar Colegiado</h5>
+                    <p class="card-text">Crie um novo colegiado de professores.</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+</html>

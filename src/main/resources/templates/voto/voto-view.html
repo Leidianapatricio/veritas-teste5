@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2>Voto #<span th:text="${voto.id}"></span></h2>
+
+    <p><strong>Assunto:</strong>
+        <span th:text="${voto.assunto != null ? voto.assunto.titulo : '—'}"></span>
+    </p>
+
+    <p><strong>Usuário:</strong>
+        <span th:text="${voto.user != null ? voto.user.username : '—'}"></span>
+    </p>
+
+    <p><strong>Escolha:</strong>
+        <span th:text="${voto.escolha}"></span>
+    </p>
+
+    <p><strong>Registrado em:</strong>
+        <span th:text="${#dates.format(voto.votadoEm, 'dd/MM/yyyy HH:mm')}"></span>
+    </p>
+
+    <a class="btn btn-warning"
+       th:href="@{'/votos/edit/' + ${voto.id}}">Editar</a>
+
+    <a class="btn btn-secondary"
+       th:href="@{/votos/list}">Voltar</a>
+
+</div>
+</html>

@@ -1,0 +1,28 @@
+.card {
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.25);
+}
+
+/* Paleta harmônica azul/violeta */
+.card-aluno {
+    background: linear-gradient(135deg, #4b6cb7, #6a82fb); /* azul suave */
+}
+
+.card-professor {
+    background: linear-gradient(135deg, #8a2be2, #b66dff); /* violeta suave */
+}
+
+.card-colegiado {
+    background: linear-gradient(135deg, #6f42c1, #9b59b6); /* roxo intermediário */
+}
+
+/* Remove sublinhado de links */
+.text-decoration-none {
+    text-decoration: none !important;
+}

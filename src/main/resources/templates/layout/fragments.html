@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- HEADER PÚBLICO -->
+<div th:fragment="header-public">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" th:href="@{/home}">Veritas</a>
+
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Início</a>
+                </li>
+            </ul>
+
+            <div>
+                <a class="btn btn-primary btn-sm" th:href="@{/login}">Entrar</a>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+
+<!-- HEADER PRIVADO -->
+<div th:fragment="header-private">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" th:href="@{/dashboard}">Veritas</a>
+
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item"><a class="nav-link" th:href="@{/collegiate/list}">Colegiais</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/assuntos/list}">Assuntos</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/votos/list}">Votos</a></li>
+
+                <li class="nav-item"
+                    th:if="${#authorization.expression('hasRole(\'ADMIN\')')}">
+                    <a class="nav-link" th:href="@{/users/list}">Usuários</a>
+                </li>
+
+            </ul>
+
+            <div>
+                <span class="text-white me-3"
+                      th:text="${#authentication.name}">User</span>
+                <a class="btn btn-danger btn-sm" th:href="@{/logout}">Sair</a>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+
+<!-- FOOTER -->
+<div th:fragment="footer">
+    <footer class="text-center text-muted mt-5 mb-3">
+        <hr>
+        <small>Veritas © 2025 - Sistema de Gestão de Colegiados</small>
+    </footer>
+</div>
+
+</body>
+</html>
+

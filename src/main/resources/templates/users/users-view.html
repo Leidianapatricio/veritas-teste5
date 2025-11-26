@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2>Usuário <span th:text="${user.username}"></span></h2>
+
+    <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+
+    <p><strong>Funções:</strong></p>
+    <ul>
+        <li th:each="r : ${user.roles}" th:text="${r.name}"></li>
+    </ul>
+
+    <a class="btn btn-warning" th:href="@{'/users/edit/' + ${user.id}}">Editar</a>
+    <a class="btn btn-secondary" th:href="@{/users/list}">Voltar</a>
+
+</div>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Votos</h2>
+        <a class="btn btn-primary" th:href="@{/votos/new}">Registrar Voto</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Assunto</th>
+            <th>Usuário</th>
+            <th>Escolha</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="v : ${votos}">
+            <td th:text="${v.id}"></td>
+            <td th:text="${v.assunto != null ? v.assunto.titulo : '—'}"></td>
+            <td th:text="${v.user != null ? v.user.username : '—'}"></td>
+            <td th:text="${v.escolha}"></td>
+            <td th:text="${#dates.format(v.votadoEm, 'dd/MM/yyyy HH:mm')}"></td>
+            <td>
+                <a class="btn btn-sm btn-info"
+                   th:href="@{'/votos/' + ${v.id}}">Ver</a>
+
+                <a class="btn btn-sm btn-warning"
+                   th:href="@{'/votos/edit/' + ${v.id}}">Editar</a>
+
+                <form th:action="@{'/votos/delete/' + ${v.id}}"
+                      method="post"
+                      style="display:inline-block;"
+                      onsubmit="return confirm('Confirmar exclusão?');">
+                    <button class="btn btn-sm btn-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</html>

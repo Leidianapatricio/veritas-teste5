@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2 th:text="${voto.id != null ? 'Editar Voto' : 'Registrar Voto'}"></h2>
+
+    <form th:action="@{/votos/save}" th:object="${voto}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Assunto</label>
+            <select name="assuntoId" class="form-select" required>
+                <option value="">Selecione</option>
+                <option th:each="a : ${assuntos}"
+                        th:value="${a.id}"
+                        th:selected="${voto.assunto != null and voto.assunto.id == a.id}"
+                        th:text="${a.titulo}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Usuário</label>
+            <select name="userId" class="form-select" required>
+                <option value="">Selecione</option>
+                <option th:each="u : ${users}"
+                        th:value="${u.id}"
+                        th:selected="${voto.user != null and voto.user.id == u.id}"
+                        th:text="${u.username}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Escolha</label>
+            <select th:field="*{escolha}" class="form-select" required>
+                <option value="">Selecione</option>
+                <option value="SIM">Sim</option>
+                <option value="NAO">Não</option>
+                <option value="ABSTENCAO">Abstenção</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success">Salvar</button>
+        <a class="btn btn-secondary" th:href="@{/votos/list}">Voltar</a>
+
+    </form>
+
+</div>
+</html>

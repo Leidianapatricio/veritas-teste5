@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2 th:text="${processo.id != null ? 'Editar Processo' : 'Novo Processo'}"></h2>
+
+    <form th:action="@{/processos/save}" th:object="${processo}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <!-- Assunto pré-definido -->
+        <div class="mb-3">
+            <label for="assunto" class="form-label">Assunto</label>
+            <select class="form-select" id="assunto" th:field="*{assunto}" required>
+                <option value="" disabled selected>Selecione um assunto</option>
+                <option th:each="a : ${assuntos}" th:value="${a}" th:text="${a}"></option>
+            </select>
+        </div>
+
+        <!-- Descrição / Requerimento -->
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" rows="6" th:field="*{descricao}" placeholder="Digite seu requerimento" required></textarea>
+        </div>
+
+        <!-- Autor -->
+        <div class="mb-3">
+            <label class="form-label">Autor</label>
+            <select name="autorId" class="form-select" required>
+                <option value="">Selecione</option>
+                <option th:each="u : ${users}"
+                        th:value="${u.id}"
+                        th:selected="${processo.autor != null and processo.autor.id == u.id}"
+                        th:text="${u.username}">
+                </option>
+            </select>
+        </div>
+
+        <!-- Colegiado -->
+        <div class="mb-3">
+            <label class="form-label">Colegiado</label>
+            <select name="colegiadoId" class="form-select" required>
+                <option value="">Selecione</option>
+                <option th:each="c : ${collegiates}"
+                        th:value="${c.id}"
+                        th:selected="${processo.colegiado != null and processo.colegiado.id == c.id}"
+                        th:text="${c.name}">
+                </option>
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select th:field="*{status}" class="form-select">
+                <option value="ABERTO">Aberto</option>
+                <option value="EM_VOTACAO">Em votação</option>
+                <option value="APROVADO">Aprovado</option>
+                <option value="REJEITADO">Rejeitado</option>
+                <option value="ARQUIVADO">Arquivado</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success">Salvar</button>
+        <a class="btn btn-secondary" th:href="@{/processos/list}">Voltar</a>
+
+    </form>
+
+</div>
+</html>
+

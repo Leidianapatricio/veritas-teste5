@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2 th:text="${collegiate.name}"></h2>
+
+    <p><strong>Descrição:</strong></p>
+    <p th:text="${collegiate.description}"></p>
+
+    <p><strong>Coordenador:</strong>
+        <span th:text="${collegiate.coordenador != null ? collegiate.coordenador.username : '—'}"></span>
+    </p>
+
+    <p><strong>Membros:</strong></p>
+    <ul>
+        <li th:each="m : ${collegiate.members}"
+            th:text="${m.username}">
+        </li>
+    </ul>
+
+    <a class="btn btn-warning" th:href="@{'/collegiate/edit/' + ${collegiate.id}}">Editar</a>
+    <a class="btn btn-secondary" th:href="@{/collegiate/list}">Voltar</a>
+
+</div>
+</html>

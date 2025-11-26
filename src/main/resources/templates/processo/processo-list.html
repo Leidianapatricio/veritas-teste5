@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Assuntos</h2>
+        <a class="btn btn-primary" th:href="@{/assuntos/new}">Novo Assunto</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Colegiado</th>
+            <th>Status</th>
+            <th>Criado Em</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${assuntos}">
+            <td th:text="${a.id}"></td>
+            <td th:text="${a.titulo}"></td>
+            <td th:text="${a.autor != null ? a.autor.username : '—'}"></td>
+            <td th:text="${a.colegiado != null ? a.colegiado.name : '—'}"></td>
+            <td th:text="${a.status}"></td>
+            <td th:text="${#dates.format(a.criadoEm, 'dd/MM/yyyy HH:mm')}"></td>
+            <td>
+                <a class="btn btn-sm btn-info" th:href="@{'/assuntos/' + ${a.id}}">Ver</a>
+                <a class="btn btn-sm btn-warning" th:href="@{'/assuntos/edit/' + ${a.id}}">Editar</a>
+
+                <form th:action="@{'/assuntos/delete/' + ${a.id}}"
+                      method="post"
+                      style="display:inline-block;"
+                      onsubmit="return confirm('Confirma exclusão?');">
+                    <button class="btn btn-sm btn-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</html>

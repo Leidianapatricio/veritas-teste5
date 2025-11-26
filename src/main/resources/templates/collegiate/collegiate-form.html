@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2 th:text="${collegiate.id != null ? 'Editar Colegiado' : 'Novo Colegiado'}"></h2>
+
+    <form th:action="@{/collegiate/save}" th:object="${collegiate}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" class="form-control" th:field="*{name}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" rows="4"
+                      th:field="*{description}"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Coordenador</label>
+            <select name="coordenadorId" class="form-select">
+                <option value="">Nenhum</option>
+                <option th:each="u : ${users}"
+                        th:value="${u.id}"
+                        th:selected="${collegiate.coordenador != null and collegiate.coordenador.id == u.id}"
+                        th:text="${u.username}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Membros</label>
+            <select name="membersIds" class="form-select" multiple size="6">
+                <option th:each="u : ${users}"
+                        th:value="${u.id}"
+                        th:selected="${collegiate.members != null and collegiate.members.contains(u)}"
+                        th:text="${u.username}">
+                </option>
+            </select>
+            <small class="text-muted">Segure CTRL para selecionar vários.</small>
+        </div>
+
+        <button class="btn btn-success">Salvar</button>
+        <a class="btn btn-secondary" th:href="@{/collegiate/list}">Voltar</a>
+
+    </form>
+
+</div>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: conteudo">
+
+<div th:fragment="conteudo">
+
+    <h2 th:text="${assunto.titulo}"></h2>
+
+    <p><strong>Descrição:</strong></p>
+    <p th:text="${assunto.descricao}"></p>
+
+    <p><strong>Autor:</strong>
+        <span th:text="${assunto.autor != null ? assunto.autor.username : '—'}"></span>
+    </p>
+
+    <p><strong>Colegiado:</strong>
+        <span th:text="${assunto.colegiado != null ? assunto.colegiado.name : '—'}"></span>
+    </p>
+
+    <p><strong>Status:</strong>
+        <span th:text="${assunto.status}"></span>
+    </p>
+
+    <p><strong>Criado em:</strong>
+        <span th:text="${#dates.format(assunto.criadoEm, 'dd/MM/yyyy HH:mm')}"></span>
+    </p>
+
+    <a th:href="@{'/assuntos/edit/' + ${assunto.id}}" class="btn btn-warning">Editar</a>
+    <a th:href="@{/assuntos/list}" class="btn btn-secondary">Voltar</a>
+
+</div>
+</html>
